@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, ChangeEvent} from 'react';
 import {Receipt} from 'react-bootstrap-icons';
 import {showError, showSuccess} from '../utils/swal';
 import {DeliveryMethod, PaymentMethod} from '../types/enums';
 import {CheckoutForm, CheckoutFormProps} from '../types/interfaces';
+import {onlyNumbers, formatInputExpiryDate} from '../utils/toolsPagesForm';
 
 export default function CheckoutForm({cart}: CheckoutFormProps) {
   const [formData, setFormData] = useState<CheckoutForm>({
@@ -137,6 +138,7 @@ export default function CheckoutForm({cart}: CheckoutFormProps) {
               type="text"
               className="form-control"
               onChange={onChangeHandler}
+              onInput={(e: ChangeEvent<HTMLInputElement>) => onlyNumbers(e,12)}
             />
           </div>
         </div>
@@ -199,6 +201,7 @@ export default function CheckoutForm({cart}: CheckoutFormProps) {
                 type="text"
                 className="form-control"
                 onChange={onChangeHandler}
+                onInput={(e: ChangeEvent<HTMLInputElement>) => onlyNumbers(e,12)}
               />
             </div>
           </div>
@@ -216,6 +219,7 @@ export default function CheckoutForm({cart}: CheckoutFormProps) {
                   type="text"
                   className="form-control"
                   onChange={onChangeHandler}
+                  onInput={(e: ChangeEvent<HTMLInputElement>) => onlyNumbers(e,18)}
                 />
               </div>
             </div>
@@ -249,6 +253,7 @@ export default function CheckoutForm({cart}: CheckoutFormProps) {
                   className="form-control"
                   aria-describedby="card_due_dateHelpBlock"
                   onChange={onChangeHandler}
+                  onInput={(e: ChangeEvent<HTMLInputElement>) => formatInputExpiryDate(e)}
                 />
                 <span
                   id="card_due_dateHelpBlock"
@@ -271,6 +276,7 @@ export default function CheckoutForm({cart}: CheckoutFormProps) {
                   type="text"
                   className="form-control"
                   onChange={onChangeHandler}
+                  onInput={(e: ChangeEvent<HTMLInputElement>) => onlyNumbers(e,3)}
                 />
                  <span
                   id="card_due_dateHelpBlock"
